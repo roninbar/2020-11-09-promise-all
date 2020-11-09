@@ -6,12 +6,13 @@ function doSomething(ms) {
         while (performance.now() - time < ms)
             ;
         resolve();
-    })
+    });
 }
 
-async function run(ms, message) {
-    await doSomething(ms);
-    console.log(message);
+function run(ms, message) {
+    doSomething(ms).then(function () {
+        console.log(message);
+    });
 }
 
 Promise.all([run(150, "first"), run(10, "second")]);
